@@ -1,10 +1,6 @@
 name: biocr-seq
 version: 0.1.0
 
-dependencies:
-  biocr-parser:
-    github: biocr/biocr-parser
-
 authors:
   - marciogm <marciogiaxa@gmail.com>
 
