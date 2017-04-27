@@ -26,8 +26,12 @@ describe Biocr::Seq::NucleicAcids do
       NucleicAcids(RNA).new("ACGU").should eq [RNA::A, RNA::C, RNA::G, RNA::U]
       NucleicAcids(RNA).new("aCgU").should eq [RNA::A, RNA::C, RNA::G, RNA::U]
 
-      NucleicAcids(DNA).new("ACGT").should be_a Biocr::Seq::NucleicAcids(Biocr::Seq::Nucleotide::DNA)
-      NucleicAcids(RNA).new("ACGU").should be_a Biocr::Seq::NucleicAcids(Biocr::Seq::Nucleotide::RNA)
+      NucleicAcids(DNA).new("ACGT").should be_a NucleicAcids(DNA)
+      NucleicAcids(RNA).new("ACGU").should be_a NucleicAcids(RNA)
+    end
+
+    it "create k Nucleotide from Array(Int)" do
+      NucleicAcids(DNA).new([1, 2, 4, 8]).should eq [DNA::A, DNA::C, DNA::G, DNA::T]
     end
   end
 
@@ -47,6 +51,18 @@ describe Biocr::Seq::NucleicAcids do
     it "convert to string and show the class" do
       dna = NucleicAcids(DNA).new("A")
       dna.inspect.should eq "[ Biocr::Seq::Nucleotide::DNA::A ]"
+    end
+  end
+
+  describe "#complement" do
+    it "return the complementary nucleotides" do
+      dna = NucleicAcids(DNA).new("ACGTAATT")
+      dna.complement.to_s.should eq "TGCATTAA"
+      dna.complement.should be_a NucleicAcids(DNA)
+
+      dna = NucleicAcids(RNA).new("ACGUAAUU")
+      dna.complement.to_s.should eq "UGCAUUAA"
+      dna.complement.should be_a NucleicAcids(RNA)
     end
   end
 

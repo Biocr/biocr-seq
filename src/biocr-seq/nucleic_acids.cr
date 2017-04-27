@@ -8,6 +8,20 @@ module Biocr::Seq
       return nucleotides
     end
 
+    def self.new(s : Array(Int)) : NucleicAcids(T)
+      nucleotides = NucleicAcids(T).new
+      s.each { |c| nucleotides << T.from_value(c) }
+      return nucleotides
+    end
+
+    def complement : NucleicAcids(T)
+      compl = self.values.map do |b|
+        (b & DNA::A.value) << 3 | (b & DNA::T.value) >> 3 | (b & DNA::C.value) << 1 | (b & DNA::G.value) >> 1
+      end
+      klass = self[1]
+      return NucleicAcids(typeof(klass)).new(compl)
+    end
+
     def values : Array(UInt8)
       self.map &.value
     end
