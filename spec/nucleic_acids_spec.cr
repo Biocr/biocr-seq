@@ -50,7 +50,10 @@ describe Biocr::Seq::NucleicAcids do
     end
     it "convert to string and show the class" do
       dna = NucleicAcids(DNA).new("A")
-      dna.inspect.should eq "[ Biocr::Seq::Nucleotide::DNA::A ]"
+      dna.inspect.should eq "[ DNA::A ]"
+
+      dna = NucleicAcids(RNA).new("A")
+      dna.inspect.should eq "[ RNA::A ]"
     end
   end
 
@@ -59,7 +62,6 @@ describe Biocr::Seq::NucleicAcids do
       dna = NucleicAcids(DNA).new("ACGTAATT")
       dna.complement.to_s.should eq "TGCATTAA"
       dna.complement.should be_a NucleicAcids(DNA)
-
       dna = NucleicAcids(RNA).new("ACGUAAUU")
       dna.complement.to_s.should eq "UGCAUUAA"
       dna.complement.should be_a NucleicAcids(RNA)

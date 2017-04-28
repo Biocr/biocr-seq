@@ -33,7 +33,7 @@ module Biocr::Seq
     def to_s(io : IO)
       executed = exec_recursive(:to_s) do
         io << "[ "
-        join(", ", io) { |i| io << "#{i.class}::#{i.inspect}" }
+        join(", ", io) { |i| io << "#{i.class.to_s.split("::")[3]}::#{i.inspect}" }
         io << " ]"
       end
       io << "[...]" unless executed
