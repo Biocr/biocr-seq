@@ -1,4 +1,14 @@
 module Biocr::Seq
+  # A `Nucleotide` is a module that contains `DNA` and `RNA` encoding.
+  #
+  # **Nucleotides** are Integer of type UInt8 and cover all IUPAC nucleotides http://www.insdc.org/documents/feature_table.html#7.4.1
+  #
+  # ```
+  # DNA.new("A")                  # => [ DNA::A ]
+  # DNA.new("A").value            # => [ 1 ]
+  # NucleicAcids(DNA).new("ACGT") # => [ DNA::A, DNA::C, DNA::G, DNA::T]
+  # ```
+  #
   module Nucleotide
     enum DNA : UInt8
       GAP = 0b0000
